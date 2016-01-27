@@ -58,22 +58,9 @@ matrix *createMatrix(size_t row, size_t col) {
  * sets the elements with the arry passed to the function.
  *=========================================================================*/
 matrix *createFullMatrix(size_t row, size_t col, double *data) {
-    // Create a new matrix pointer
+    // Create a new matrix 
     matrix *newMat;
-    assert(row > 0 && col > 0, "Matrix must be at least 1 by 1.");
-
-    // Allocate memory for the new matrix
-    newMat = (matrix*) malloc(sizeof(matrix));
-
-    // Check if the is not NULL
-    assert(newMat != NULL, "Out of memory!");
-
-    newMat->M = row;
-    newMat->N = col;
-    newMat->data = (double*) malloc(sizeof(double) * row * col);
-
-    // Check if data is not NULL
-    assert(newMat->data != NULL, "Out of memory!");
+    newMat = createMatrix(row, col);
 
     /* ================================
      *  BUG: number of data elements

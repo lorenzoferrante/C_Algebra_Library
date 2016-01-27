@@ -25,7 +25,8 @@ void assert(int assertion, char* message) {
 
 /*===========================================================================
  * createMatrix
- * Create an arbitrary matrix, given rows and colums dimension.
+ * Create an arbitrary matrix, given rows and colums dimension, and 
+ * sets the elements to 0.
  *=========================================================================*/
 matrix *createMatrix(size_t row, size_t col) {
     // Create a new matrix pointer
@@ -51,6 +52,11 @@ matrix *createMatrix(size_t row, size_t col) {
     return newMat;
 }
 
+/*===========================================================================
+ * createMatrix
+ * Create an arbitrary matrix, given rows and colums dimension, and 
+ * sets the elements with the arry passed to the function.
+ *=========================================================================*/
 matrix *createFullMatrix(size_t row, size_t col, double *data) {
     // Create a new matrix pointer
     matrix *newMat;

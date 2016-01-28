@@ -25,7 +25,7 @@ void assert(int assertion, char* message) {
 
 /*===========================================================================
  * createMatrix
- * Create an arbitrary matrix, given rows and colums dimension, and 
+ * Create an arbitrary matrix, given rows and colums dimension, and
  * sets the elements to 0.
  *=========================================================================*/
 matrix *createMatrix(size_t row, size_t col) {
@@ -53,12 +53,12 @@ matrix *createMatrix(size_t row, size_t col) {
 }
 
 /*===========================================================================
- * createMatrix
- * Create an arbitrary matrix, given rows and colums dimension, and 
+ * createFullMatrix
+ * Create an arbitrary matrix, given rows and colums dimension, and
  * sets the elements with the arry passed to the function.
  *=========================================================================*/
 matrix *createFullMatrix(size_t row, size_t col, double *data) {
-    // Create a new matrix 
+    // Create a new matrix
     matrix *newMat;
     newMat = createMatrix(row, col);
 
@@ -74,3 +74,69 @@ matrix *createFullMatrix(size_t row, size_t col, double *data) {
 
     return newMat;
 }
+
+/*===========================================================================
+ * copyMatrix
+ * Given a matrix, returns a perfect copy of it
+ *=========================================================================*/
+matrix *copyMatrix(matrix *m) {
+    // Alloc and create a new matrix
+    matrix *newMat = createFullMatrix(m->M, m->N, m->data);
+
+    return newMat;
+}
+
+/*===========================================================================
+ * trasposeMatrix
+ * Given a marix, returns the traspose.
+ *=========================================================================*/
+matrix *trasposeMatrix(matrix *m) {
+    // Invert rows and columns
+    matrix *newMat = createMatrix(m->N, m->M);
+    double *newElem;
+    double *mElem = m->data;
+    int i = 0, j = 0;
+
+    // Cycle m columns
+    for (; i < m->N; i++) {
+        newElem = &(newMat->data[i]);
+        // Cycle n rows
+        for (; j < m->M; j++) {
+            // Set the new element
+            *newElem = *mElem;
+            mElem++;
+            newElem += newMat->M;
+        }
+    }
+
+    return newMat;
+}
+
+/*===========================================================================
+ * convertToNormaMatrix
+ * Given a matrix, returns a new matrix with the same data, but in the
+ * form matrix[i][j].
+ *=========================================================================*/
+double **convertToNormalMatrix(matrix *m) {
+    int x = 0;
+    size_t rows = m->M, cols = m->N;
+    // Create a new matrix pointer and allocate
+    // rows-pointers
+    double **newMat = (double**) malloc(sizeof(double*) * rows);
+
+    // For each rows allocate an arry of cols-element
+    for (int i = 0; i < rows; ++i) {
+        newMat[i] = malloc(sizeof(double) * cols);
+    }
+
+    // Populate the matrix
+    for (int j = 0; j < rows; ++j) {
+        for (int k = 0; k < cols; ++k) {
+            newMat[j][k] = m->data[x];
+            x++;
+        }
+    }
+
+    return newMat;
+}
+

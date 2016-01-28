@@ -22,10 +22,12 @@ typedef struct _matrix {
 extern void assert(int assertion, char *message);
 
 /*============================
- * Useful algebra functions
+ * Useful Matrix functions
  *==========================*/
 extern matrix *createMatrix(size_t row, size_t col);
 extern matrix *createFullMatrix(size_t row, size_t col, double *data);
 extern matrix *copyMatrix(matrix *m);
+extern matrix *trasposeMatrix(matrix *m);
+extern double **convertToNormalMatrix(matrix *m);
 
 #endif //ALGEBRA_ALGEBRA_H
